@@ -119,4 +119,18 @@ export class ProdutoService {
     });
     }
 
+    async findEstoqueBaixo(): Promise<Produto[]>{
+        return this.produtoRepository.find({
+            where:{
+                qtd_estoque: LessThan(5),
+            },
+            order: {
+                qtd_estoque: 'ASC',
+            },
+            relations: {
+                categoria: true,
+            },
+        })
+    }
+
 }

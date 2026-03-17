@@ -12,18 +12,13 @@ export class ProdutoController {
     return this.produtoService.findAll();
   }
 
-  @Get('/:id')
-  @HttpCode(HttpStatus.OK)
-  findById(@Param('id') id: number): Promise<Produto> {
-    return this.produtoService.findById(id);
-  }
-
+  
   @Get('/nome/:nome')
   @HttpCode(HttpStatus.OK)
   findByTitulo(@Param('nome') nome: string): Promise<Produto[]> {
     return this.produtoService.findByNome(nome);
   }
-
+  
   @Post()
   @HttpCode(HttpStatus.CREATED)
   post(@Body() produto: Produto): Promise<Produto> {
@@ -35,29 +30,40 @@ export class ProdutoController {
   put(@Body() produto: Produto): Promise<Produto> {
     return this.produtoService.update(produto);
   }
-
-  @Delete('/:id')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.produtoService.delete(id);
-  }
-
+  
+  
   @Get('/preco_maior/:preco')
   @HttpCode(HttpStatus.OK)
   findByPrecoMaior(@Param('preco') preco: number): Promise<Produto[]> {
     return this.produtoService.findByPrecoMaior(preco);
   }
-
+  
   @Get('/preco_menor/:preco')
   @HttpCode(HttpStatus.OK)
   findByPrecoMenor(@Param('preco') preco: number): Promise<Produto[]> {
     return this.produtoService.findByPrecoMenor(preco);
   }
-
+  
   @Get('/preco_entre/:min/:max')
   findByPrecoEntre(@Param('min', ParseIntPipe) min: number, @Param('max', ParseIntPipe) max:number): Promise<Produto[]> {
     return this.produtoService.findByPrecoEntre(min, max);
   }
-
+  
+  @Get('/estoque_baixo')
+  findByEstoqueBaixo() : Promise<Produto[]> {
+    return this.produtoService.findEstoqueBaixo();
+  }
+  
+  @Get('/:id')
+  @HttpCode(HttpStatus.OK)
+  findById(@Param('id') id: number): Promise<Produto> {
+    return this.produtoService.findById(id);
+  }
+  
+  @Delete('/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.produtoService.delete(id);
+  }
 
 }

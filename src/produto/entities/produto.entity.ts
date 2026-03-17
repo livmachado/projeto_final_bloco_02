@@ -23,7 +23,7 @@ export class Produto {
 
     @IsInt()
     @Min(0)
-    @Column('int', { default: 0 })
+    @Column('int', { default: 0, name: 'qtd_estoque'})
     qtd_estoque:number
 
     @Column({length: 500 })
